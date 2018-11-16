@@ -1,3 +1,28 @@
-<% @cocktails.each do |cocktail| %>
-  <p><%= cocktail.name %>,<%= cocktail.doses%></p>
-<% end %>
+<%= link_to "new Cocktail", new_cocktail_path %>
+<div class="container">
+  <div class="row">
+    <% @cocktails.each do |cocktail| %>
+    <div class="col-xs-12 col-sm-4">
+      <% if cocktail['photo'] == nil %>
+      <p>No photo</p>
+      <% else %>
+       <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path cocktail.photo, height: 300, width: 400, crop: :fill %>')">
+    <% end %>
+
+        <div class="card-category"><%= cocktail.name %></div>
+        <% cocktail.doses.each do |dose| %>
+        <div class="card-description">
+          <h2>  <%= dose.description %></h2>
+        </div>
+        <% end %>
+      </div> <!-- insert <div class="card"> -->
+    </div>
+    <% end %>
+  </div>
+</div>
+<!-- cocktail: {
+  id: 1,
+  name: "hello",
+  photo: "www.cloudinary.com/yourphoto/1"
+} -->
+
